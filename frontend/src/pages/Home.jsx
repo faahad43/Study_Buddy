@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sidebar from "../components/sidebar.jsx";
+import Sidebar from "../components/Sidebar.jsx";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
