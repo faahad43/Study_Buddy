@@ -12,5 +12,7 @@ export default {
       secondary2: "#731042",
     },
   },
-  plugins: [],
+  plugins: [
+    require('daisyui'),
+  ],
 };
