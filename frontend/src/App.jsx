@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import SoloStudyPage from "./pages/SoloStudy.jsx";
 import StudyGroupPage from "./pages/GroupStudy.jsx";
 import StatsPage from "./pages/Stats.jsx";
-import Sidebar from "./components/Sidebar.jsx";
+
 import Login from "./pages/Login.jsx";
 import Registration from "./pages/Registration.jsx";
 
@@ -11,7 +11,6 @@ function App() {
   return (
     <Router>
       <div>
-        {/* <Sidebar /> */}
         <Routes>
           <Route path="/solo" element={<SoloStudyPage />} />
           <Route path="/group" element={<StudyGroupPage />} />
@@ -19,7 +18,6 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registration" element={<Registration />} />
-          
         </Routes>
       </div>
     </Router>
