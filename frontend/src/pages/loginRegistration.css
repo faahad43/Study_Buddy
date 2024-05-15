@@ -1,0 +1,4 @@
+.bg-cover{
+    background: rgb(54,0,51);
+    background: linear-gradient(90deg, rgba(54,0,51,1) 0%, rgba(11,135,147,1) 100%);
+}
