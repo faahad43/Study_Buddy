@@ -15,7 +15,11 @@ function Home() {
   };
 
   return (
-    <div className="h-screen w-screen bg-background_default flex">
+    <div className="flex">
+       <div className="w-[5%] h-screen bg-primary">
+          <Sidebar />
+        </div>
+        <div className="h-screen w-[95%] bg-background_default flex">
       <div className="h-screen w-1/2 bg-secondary2 flex flex-1 items-center justify-center">
         <div
           className="h-1/3 w-1/2 bg-secondary rounded-lg flex items-center justify-center hover:scale-105 delay-75"
@@ -32,8 +36,9 @@ function Home() {
           <h1 className="text-text text-4xl">Start a Study Group</h1>
         </div>
       </div>
-      <Sidebar />
     </div>
+    </div>
+    
   );
 }
 
