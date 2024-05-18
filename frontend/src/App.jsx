@@ -12,6 +12,8 @@ import Chat from "./pages/chat.jsx";
 import Dashboard from "./pages/dashboard.jsx";
 import Registration from "./pages/Registration.jsx";
 import Login from "./pages/Login.jsx";
+import StatsPage from "./pages/Stats.jsx";
+import GoalsPage from "./pages/goals.jsx";
 import { Toaster } from "react-hot-toast";
 import { useAuthContext } from "./context/AuthContext.jsx";
 
@@ -23,6 +25,8 @@ function App() {
       <div className="w-screen">
         <Routes>
           <Route path="/solo" element={<SoloStudyPage />} />
+          <Route path="/stats" element={<StatsPage />} />
+          <Route path="/goals" element={<GoalsPage />} />
           <Route path="/group" element={<StudyGroupPage />} />
           <Route
             path="/home"
