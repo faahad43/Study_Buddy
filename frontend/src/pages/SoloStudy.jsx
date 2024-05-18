@@ -13,10 +13,14 @@ function SoloStudy() {
   };
 
   return (
-    <div className="h-screen w-screen bg-background_default flex">
-      <Sidebar />
+    <div className="flex">
+      <div className="w-[5%] h-screen bg-primary">
+          <Sidebar />
+        </div>
+      <div className="h-screen w-[95%] bg-background_default flex">
+      </div>
     </div>
-  );
+     );
 }
 
 export default SoloStudy;

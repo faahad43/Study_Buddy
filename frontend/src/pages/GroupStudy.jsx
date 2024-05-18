@@ -13,9 +13,14 @@ function GroupStudy() {
   };
 
   return (
-    <div className="h-screen w-screen bg-secondary2 flex">
-      <Sidebar />
+    <div className="flex">
+      <div className="w-[5%] h-screen bg-primary">
+          <Sidebar />
+        </div>
+        <div className="h-screen w-[95%] bg-secondary2 flex">
+        </div>
     </div>
+    
   );
 }
 
