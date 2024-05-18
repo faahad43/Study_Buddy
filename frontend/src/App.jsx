@@ -20,7 +20,7 @@ function App() {
             <Route path="/solo" element={<SoloStudyPage />} />
             <Route path="/group" element={<StudyGroupPage />} />
             <Route path="/home" element={authUser?<Home />:<Navigate to="/login"/>} />
-            <Route path="/chat" element={<Chat />} />
+            <Route path="/chat" element={authUser?<Chat />:<Navigate to="/login"/>} />
             <Route path="/login" element={authUser? <Navigate to="/chat"/> :<Login />} />
             <Route path="/registration" element={authUser ? <Navigate to="/chat"/> : <Registration />} />
             <Route path="/dashboard" element={<Dashboard />} />
