@@ -1,11 +1,77 @@
 import React, { useState } from "react";
 import Sidebar from "../components/Sidebar.jsx";
 import iconpath1 from "../assets/icons/meeting.png";
+import { IoPersonCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { BiUser } from "react-icons/bi";
-import { AiOutlineUnlock } from "react-icons/ai";
+import { PiRanking } from "react-icons/pi";
+import { IoIosBookmarks } from "react-icons/io";
+import { TbAlarmAverage } from "react-icons/tb";
+import { Bar } from "react-chartjs-2"; // Import Bar from react-chartjs-2
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+// Registering Chart.js components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 function Stats() {
+  const data = {
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+      {
+        label: "Dataset 1",
+        backgroundColor: "rgba())",
+        borderColor: "#2374a6",
+        borderWidth: 1,
+
+        hoverBackgroundColor: "#2374a6",
+        hoverBorderColor: "#2374a6",
+        data: [65, 59, 80, 81, 56, 55, 40],
+      },
+    ],
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        labels: {
+          color: "white", // Set legend label text color to white
+        },
+        position: "bottom",
+      },
+      title: {
+        display: true,
+        color: "white", // Set title text color to white
+        text: "Avg StudyTime",
+      },
+    },
+    scales: {
+      x: {
+        ticks: {
+          color: "white", // Set x-axis label text color to white
+        },
+      },
+      y: {
+        ticks: {
+          color: "white", // Set y-axis label text color to white
+        },
+      },
+    },
+  };
   return (
     <div className=" flex">
       <div className="w-[5%] h-screen bg-primary">
@@ -16,8 +82,8 @@ function Stats() {
         {/* left div */}
         <div className="flex flex-wrap gap-10 w-[75%]">
           <div className="bg-slate8 flex-wrap flex justify-center items-center border mt-8 ml-10 w-[25%] h-[40%] border-slate6 rounded-md p-8 shadow-lg backdrop-filter backdrop-blur-lg bg-opacity-30 relative transition-all duration-200">
-            <div className=" w-[50%] rounded-[50%] h-[40%] overflow-hidden">
-              <img className=" bg-slate-200" src={iconpath1} />
+            <div className=" w-[50%] rounded-[50%] h-[40%] ">
+              <IoPersonCircleOutline className="w-[100%]  h-[100%]" />
             </div>
             <div className=" flex w-[60%] items-center justify-center">
               <p className=" text-xl text-text font-bold text-center  mb-6">
@@ -25,35 +91,39 @@ function Stats() {
               </p>
             </div>
           </div>
-          <div className="bg-slate8 border mt-8 w-[68%] h-[40%] border-slate6 rounded-md p-8 shadow-lg backdrop-filter backdrop-blur-lg bg-opacity-30 relative transition-all duration-200">
-            <h1 className="text-4xl text-text font-bold text-center mb-6">
-              CHART
-            </h1>
-          </div>
 
+          <div className="bg-slate8 border mt-8 w-[68%] h-[40%] border-slate6 rounded-md p-8 shadow-lg backdrop-filter backdrop-blur-lg bg-opacity-30 relative transition-all duration-200">
+            <div className="relative w-[100%] h-[100%]">
+              <Bar
+                data={data}
+                options={options}
+                className="absolute top-0 left-0 w-[100%] h-full"
+              />
+            </div>
+          </div>
           <div className="bg-slate8 gap-5 border mb-20 flex justify-center items-center ml-10 w-[60%] h-[40%] border-slate6 rounded-md p-8 shadow-lg backdrop-filter backdrop-blur-lg bg-opacity-30 relative transition-all duration-200">
             <div className=" w-[50%] h-[90%] flex flex-wrap justify-center items-center">
-              <div>
-                <img className=" ml-12 w-[50%] h-[50%]" src={iconpath1} />
+              <div className=" w-[50%] h-[50%]">
+                <PiRanking className=" w-[100%] h-[100%]" />
               </div>
-              <div>
-                <h1 className=" text-text">Rank</h1>
-              </div>
-            </div>
-            <div className=" w-[50%] h-[90%] flex flex-wrap justify-center items-center">
-              <div>
-                <img className=" ml-12 w-[50%] h-[50%]" src={iconpath1} />
-              </div>
-              <div>
-                <h1 className=" text-text">Study Time</h1>
+              <div className=" w-[60%] h-[60%] flex justify-center items-center">
+                <h1 className=" text-text text-2xl">Rank</h1>
               </div>
             </div>
             <div className=" w-[50%] h-[90%] flex flex-wrap justify-center items-center">
-              <div>
-                <img className=" ml-12 w-[50%] h-[50%]" src={iconpath1} />
+              <div className=" w-[50%] h-[50%]">
+                <IoIosBookmarks className=" w-[100%] h-[100%]" />
               </div>
-              <div>
-                <h1 className=" text-text">AVG/Day</h1>
+              <div className=" w-[60%] h-[60%] flex justify-center items-center">
+                <h1 className=" text-text text-2xl">Study Time</h1>
+              </div>
+            </div>
+            <div className=" w-[50%] h-[90%] flex flex-wrap justify-center items-center">
+              <div className=" w-[50%] h-[50%]">
+                <TbAlarmAverage className=" w-[100%] h-[100%]" />
+              </div>
+              <div className=" w-[60%] h-[60%] flex justify-center items-center">
+                <h1 className=" text-text text-2xl">AVG/day</h1>
               </div>
             </div>
           </div>
