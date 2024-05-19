@@ -5,16 +5,10 @@ import { getRandomEmoji } from '../utils/emojis.js';
 
 const Conversations = () => {
   const { loading, conversations } = useGetConversations();
-  
-  // Debugging: Check what is returned from useGetConversations
-  console.log("CONVERSATIONS type:", typeof conversations);
-  console.log("CONVERSATIONS:", conversations);
-
-  if (!Array.isArray(conversations)) {
-    // Ensure conversations is an array before calling map
-    console.error('Conversations is not an array', conversations);
-    return null;
-  }
+  // if (!Array.isArray(conversations)) {
+  //   // Ensure conversations is an array before calling map
+  //   return null;
+  // }
 
   return (
     <div className='py-2 flex flex-col overflow-auto'>

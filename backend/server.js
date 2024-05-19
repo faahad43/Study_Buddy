@@ -12,10 +12,10 @@ import {app, server} from "./socket/socket.js"
 
 const PORT = 3000;
 
-app.use(cors({
-    origin: "http://localhost:5173", // Allow requests from this origin
-    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
-  }));
+// app.use(cors({
+//     origin: "http://localhost:5173", // Allow requests from this origin
+//     credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+//   }));
 
 app.get("/",(req,res)=>{
     res.send("Hello Mllo");
