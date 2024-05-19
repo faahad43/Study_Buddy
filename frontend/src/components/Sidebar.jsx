@@ -1,39 +1,58 @@
 import React from "react";
-import iconpath1 from "../assets/icons/meeting.png";
-import iconpath2 from "../assets/icons/stats.png";
-import iconpath3 from "../assets/icons/messages.png";
-import iconpath4 from "../assets/icons/flag.png";
-import iconpath5 from "../assets/icons/e-learning.png";
-import iconpath6 from "../assets/icons/memo-pad.png";
+import { GrBook } from "react-icons/gr";
+import { HiMiniPencilSquare } from "react-icons/hi2";
+import { HiOutlineHome } from "react-icons/hi2";
+import { GrGroup } from "react-icons/gr";
+import { GrOptimize } from "react-icons/gr";
+import { GrTrophy } from "react-icons/gr";
+import { HiOutlineChat } from "react-icons/hi";
 
 const sidebar = () => {
   return (
-    <div className="  flex-1 fixed top-0 left-0 gap-3 h-screen w-16 m-0 flex flex-col bg-primary text-text items-center">
-      <div className=" mt-4">
-        <img className=" w-8 h-8 " src={iconpath5} alt="Iconalt" />
-        {"Solo"}
-      </div>
-
-      <div>
-        <img className=" w-8 h-8" src={iconpath2} alt="Iconalt" />
-        {"Stats"}
-      </div>
-      <div>
-        <img className=" w-8 h-8" src={iconpath4} alt="Iconalt" />
-        {"Goals"}
-      </div>
-      <div>
-        <img className=" w-8 h-8" src={iconpath3} alt="Iconalt" />
-        {"Chats"}
-      </div>
-
-      <div>
-        <img className=" w-8 h-8" src={iconpath6} alt="Iconalt" />
-        {"Notes"}
-      </div>
-      <div>
-        <img className=" w-8 h-8" src={iconpath1} alt="Iconalt" />
-        {"Group"}
+    <div className=" justify-center fixed top-0 ">
+      <div class="flex flex-col justify-center w-16 overflow-hidden text-indigo-300 bg-indigo-900 rounded h-screen items-center">
+        <a
+          class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-indigo-700"
+          href="#"
+        >
+          <HiOutlineHome className="w-6 h-6" />
+        </a>
+        <a
+          class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-indigo-700"
+          href="#"
+        >
+          <GrBook className="w-6 h-6" />
+        </a>
+        <a
+          class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-indigo-700"
+          href="#"
+        >
+          <GrOptimize className="w-6 h-6" />
+        </a>
+        <a
+          class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-indigo-700"
+          href="#"
+        >
+          <GrTrophy className="w-6 h-6" />
+        </a>
+        <a
+          class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-indigo-700"
+          href="#"
+        >
+          <GrGroup className="w-6 h-6" />
+        </a>
+        <a
+          class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-indigo-700"
+          href="#"
+        >
+          <HiMiniPencilSquare className="w-6 h-6" />
+        </a>
+        <a
+          class="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-indigo-700"
+          href="#"
+        >
+          <HiOutlineChat className="w-6 h-6" />
+        </a>
       </div>
     </div>
   );

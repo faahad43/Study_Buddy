@@ -10,18 +10,20 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "react": "^18.2.0",
-=======
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
     "@mui/material": "^5.15.16",
+    "@zegocloud/zego-uikit-prebuilt": "^2.2.0",
+    "material-ui": "^0.20.2",
     "react": "^18.3.1",
->>>>>>> origin/main
     "react-dom": "^18.2.0",
     "react-icons": "^5.2.1",
     "react-router-dom": "^6.23.0",
-    "react-video-renderer": "^2.5.1"
+    "react-video-renderer": "^2.5.1",
+    "simple-peer": "^9.11.1",
+    "socket.io-client": "^4.7.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
