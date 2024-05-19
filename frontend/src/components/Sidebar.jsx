@@ -5,6 +5,7 @@ import iconpath3 from "../assets/icons/messages.png";
 import iconpath4 from "../assets/icons/flag.png";
 import iconpath5 from "../assets/icons/e-learning.png";
 import iconpath6 from "../assets/icons/memo-pad.png";
+import LogoutButton from './logoutButton.jsx'
 
 const sidebar = () => {
   return (
@@ -35,6 +36,7 @@ const sidebar = () => {
         <img className=" w-8 h-8" src={iconpath1} alt="Iconalt" />
         {"Group"}
       </div>
+      <LogoutButton/>
     </div>
   );
 };
