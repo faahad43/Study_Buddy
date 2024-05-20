@@ -3,7 +3,7 @@ import useConversation from "../zustand/useConversation";
 
 const useSendMessage = () => {
   const [loading, setLoading] = useState(false);
-  const { selectedConversation, messages, setMessages } = useConversation();
+  const { messages, setMessages,selectedConversation} = useConversation();
 
   const sendMessage = async (message) => {
     setLoading(true);
@@ -13,12 +13,13 @@ const useSendMessage = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ message })
+        body: JSON.stringify( {message} )
       });
       const data = await res.json();
+      // console.log("adwem",data);
       if (data.error) throw new Error(data.error);
 
-      setMessages([...messages, data]);
+      setMessages([...messages, data.newMessage]);
     } catch (error) {
       toast.error(error.message);
     } finally {

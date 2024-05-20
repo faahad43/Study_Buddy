@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useAuthContext } from '../context/AuthContext.jsx';
 import useConversation from '../zustand/useConversation.js';
 import { extractTime } from '../utils/extractTime.js';
