@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar.jsx";
 import iconpath1 from "../assets/icons/meeting.png";
 import { IoPersonCircleOutline } from "react-icons/io5";
@@ -7,6 +7,7 @@ import { PiRanking } from "react-icons/pi";
 import { IoIosBookmarks } from "react-icons/io";
 import { TbAlarmAverage } from "react-icons/tb";
 import { Bar } from "react-chartjs-2"; // Import Bar from react-chartjs-2
+import { useAuthContext } from "../context/AuthContext.jsx";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -29,10 +30,10 @@ ChartJS.register(
 
 function Stats() {
   const data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: ["mon", "tues", "weds", "weds", "fri", "sat", "sun"],
     datasets: [
       {
-        label: "Dataset 1",
+        label: "days",
         backgroundColor: "rgba())",
         borderColor: "#2374a6",
         borderWidth: 1,
@@ -72,6 +73,82 @@ function Stats() {
       },
     },
   };
+
+  // useEffect hook to fetch study time and user rank data
+  useEffect(() => {
+    fetchStudyTime();
+    fetchUserRank();
+    fetchUsername();
+  }, []);
+
+  // Function to fetch study time data from the API
+  const fetchStudyTime = async () => {
+    try {
+      const response = await fetch("/api/study-time", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${authUser.token}`,
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setStudyTime(data);
+      } else {
+        throw new Error("Failed to fetch study time");
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  // Function to fetch user rank data from the API
+  const fetchUserRank = async () => {
+    try {
+      const response = await fetch("/api/study-time/rank", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${authUser.token}`,
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setUserRank(data);
+      } else {
+        throw new Error("Failed to fetch user rank");
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  const fetchUsername = async () => {
+    try {
+      // Extract first name, last name, and profile pic from authUser
+      const { firstname, lastname, profilePic } = authUser;
+
+      // Combine first name and last name to form the full name
+      const fullName = `${firstname} ${lastname}`;
+
+      // Set the full name and profile pic in the state
+      setName(fullName);
+      setProfilePic(profilePic); // Assuming you have a state variable named 'profilePic'
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  // Function to calculate average study time per day
+  const calculateAvgStudyTimePerDay = () => {
+    const totalStudyTimeInMinutes = studyTime.hours * 60 + studyTime.minutes;
+    const avgStudyTimePerDay = totalStudyTimeInMinutes / 7; // Assuming 7 days a week
+    return avgStudyTimePerDay.toFixed(2); // Round to 2 decimal places
+  };
+
+  const [studyTime, setStudyTime] = useState({ hours: 0, minutes: 0 });
+  const [userRank, setUserRank] = useState(null);
+  const [name, setName] = useState(null);
+  const [profilepic, setProfilePic] = useState(null); // State to hold the username
+  const { authUser } = useAuthContext();
   return (
     <div className=" flex">
       <div className="w-[5%] h-screen bg-primary">
@@ -83,11 +160,14 @@ function Stats() {
         <div className="flex flex-wrap gap-10 w-[75%]">
           <div className="bg-slate8 flex-wrap flex justify-center items-center border mt-8 ml-10 w-[25%] h-[40%] border-slate6 rounded-md p-8 shadow-lg backdrop-filter backdrop-blur-lg bg-opacity-30 relative transition-all duration-200">
             <div className=" w-[50%] rounded-[50%] h-[40%] ">
-              <IoPersonCircleOutline className="w-[100%]  h-[100%]" />
+              <IoPersonCircleOutline
+                className="w-[100%]  h-[100%] "
+                src={profilepic}
+              />
             </div>
             <div className=" flex w-[60%] items-center justify-center">
               <p className=" text-xl text-text font-bold text-center  mb-6">
-                name
+                {name ? name : "Loading..."}
               </p>
             </div>
           </div>
@@ -107,30 +187,45 @@ function Stats() {
                 <PiRanking className=" w-[100%] h-[100%]" />
               </div>
               <div className=" w-[60%] h-[60%] flex justify-center items-center">
-                <h1 className=" text-text text-2xl">Rank</h1>
+                <h1 className=" text-text text-2xl">
+                  {" "}
+                  Rank: {userRank ? userRank.rank : "-"}
+                </h1>
               </div>
             </div>
             <div className=" w-[50%] h-[90%] flex flex-wrap justify-center items-center">
               <div className=" w-[50%] h-[50%]">
                 <IoIosBookmarks className=" w-[100%] h-[100%]" />
               </div>
-              <div className=" w-[60%] h-[60%] flex justify-center items-center">
-                <h1 className=" text-text text-2xl">Study Time</h1>
+              <div className=" w-[60%] h-[60%] flex flex-wrap ml-5 justify-center items-center">
+                <h1 className="text-text text-xl w-[100%]"> Study Time:</h1>
+                <h1 className="text-text text-xl w-[100%]">
+                  {" "}
+                  {studyTime
+                    ? `${studyTime.hours} hrs ${studyTime.minutes} mins`
+                    : "-"}
+                </h1>
               </div>
             </div>
             <div className=" w-[50%] h-[90%] flex flex-wrap justify-center items-center">
               <div className=" w-[50%] h-[50%]">
                 <TbAlarmAverage className=" w-[100%] h-[100%]" />
               </div>
-              <div className=" w-[60%] h-[60%] flex justify-center items-center">
-                <h1 className=" text-text text-2xl">AVG/day</h1>
+              <div className=" w-[60%] h-[60%] ml-12 flex flex-wrap justify-center items-center">
+                <h1 className="text-text text-xl justify-center w-[100%]">
+                  {" "}
+                  Avg/Day
+                </h1>
+                <h1 className="text-text text-xl w-[100%]">
+                  {calculateAvgStudyTimePerDay()} mins
+                </h1>
               </div>
             </div>
           </div>
           <div className="bg-slate8 border flex flex-wrap w-[33%] h-[40%] border-slate6 rounded-md p-8 shadow-lg backdrop-filter backdrop-blur-lg bg-opacity-30 relative transition-all duration-200">
             <div className="  w-[100%] h-[22%] gap-4 flex">
               <div className=" w-[20%] h-[100%] rounded-[50%] flex justify-center items-center bg-slate-800">
-                <h1 className=" text-sky-100 text-3xl">1</h1>
+                <h1 className=" text-sky-100 text-2xl">1</h1>
               </div>
               <div className=" w-[80%] h-[100%] justify-center items-center flex text-3xl">
                 <h1>Study Streak</h1>

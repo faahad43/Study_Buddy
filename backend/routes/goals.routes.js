@@ -1,19 +1,19 @@
 import express from "express";
 import {
-  getOpenGoalsAndNumber,
-  getClosedGoalsAndNumber,
+  getOpenGoals,
+  getClosedGoals,
   postOpenGoal,
   postClosedGoal,
   deleteOpenGoal,
   deleteClosedGoal,
-} from "../controllers/goals.constroller.js";
+} from "../controllers/goals.controller.js";
 import protectRoute from "../middleware/protectRoute.js";
 
 const router = express.Router();
 
 // Routes
-router.get("/open", protectRoute, getOpenGoalsAndNumber);
-router.get("/closed", protectRoute, getClosedGoalsAndNumber);
+router.get("/open", protectRoute, getOpenGoals);
+router.get("/closed", protectRoute, getClosedGoals);
 router.post("/open", protectRoute, postOpenGoal);
 router.post("/closed", protectRoute, postClosedGoal);
 router.delete("/open", protectRoute, deleteOpenGoal);

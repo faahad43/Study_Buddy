@@ -9,6 +9,7 @@ import userRoute from "./routes/user.routes.js";
 import noteRoute from "./routes/notes.routes.js";
 import goalRoute from "./routes/goals.routes.js";
 import studyTimeRoute from "./routes/studytime.routes.js";
+import sessiontimeRoute from "./routes/sessiontime.routes.js";
 
 import connectTODb from "./db/connectToDb.js";
 
@@ -35,6 +36,7 @@ app.use("/api/users", userRoute);
 app.use("/api/notes", noteRoute);
 app.use("/api/goals", goalRoute);
 app.use("/api/study-time", studyTimeRoute);
+app.use("/api/sessiontime", sessiontimeRoute);
 
 server.listen(PORT, () => {
   connectTODb();

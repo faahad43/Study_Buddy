@@ -1,49 +1,117 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar.jsx";
-import { PiRanking } from "react-icons/pi";
-import { MdRadioButtonUnchecked } from "react-icons/md";
-import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
-import { GrTrophy } from "react-icons/gr";
 import { FaPlus } from "react-icons/fa";
+import { useAuthContext } from "../context/AuthContext.jsx";
+import toast from "react-hot-toast";
 
 const Notes = ({ display }) => {
   const [title, setTitle] = useState("");
   const [note, setNote] = useState("");
   const [savedNotes, setSavedNotes] = useState([]);
-  const [inputValue, setInputValue] = useState("");
-  const [goals, setGoals] = useState([]);
+  const [currentNoteId, setCurrentNoteId] = useState(null);
+  const { authUser } = useAuthContext();
+
+  useEffect(() => {
+    fetchNotes();
+  }, []);
+
+  const fetchNotes = async () => {
+    try {
+      const res = await fetch("/api/notes", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authUser.token}`,
+        },
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setSavedNotes(data);
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleNoteChange = (e) => setNote(e.target.value);
-  const handleInputChange = (e) => setInputValue(e.target.value);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (title.trim() && note.trim()) {
-      setSavedNotes([
-        ...savedNotes,
-        { title, note, date: new Date().toLocaleString() },
-      ]);
-      setTitle("");
-      setNote("");
+      try {
+        let res, data;
+        if (currentNoteId) {
+          // Update existing note
+          res = await fetch(`/api/notes/${currentNoteId}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${authUser.token}`,
+            },
+            body: JSON.stringify({ title, note }),
+          });
+        } else {
+          // Create new note
+          res = await fetch("/api/notes", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${authUser.token}`,
+            },
+            body: JSON.stringify({ title, note }),
+          });
+        }
+
+        data = await res.json();
+        if (res.ok) {
+          if (currentNoteId) {
+            setSavedNotes(
+              savedNotes.map((n) => (n._id === currentNoteId ? data : n))
+            );
+            toast.success("Note updated successfully");
+          } else {
+            setSavedNotes([...savedNotes, data]);
+            toast.success("Note added successfully");
+          }
+          setTitle("");
+          setNote("");
+          setCurrentNoteId(null);
+        } else {
+          throw new Error(data.message);
+        }
+      } catch (error) {
+        toast.error(error.message);
+      }
     }
   };
 
-  const handleAddGoal = () => {
-    if (inputValue.trim() !== "") {
-      setGoals([...goals, inputValue.trim()]);
-      setInputValue("");
+  const handleDeleteNote = async (id) => {
+    try {
+      const res = await fetch(`/api/notes/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authUser.token}`,
+        },
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setSavedNotes(savedNotes.filter((note) => note._id !== id));
+        toast.success(data.message);
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
     }
   };
 
-  const handleDeleteNote = (index) => {
-    const updatedNotes = [...savedNotes];
-    updatedNotes.splice(index, 1);
-    setSavedNotes(updatedNotes);
-  };
-
-  const handleRemoveGoal = (index) => {
-    const updatedGoals = goals.filter((_, i) => i !== index);
-    setGoals(updatedGoals);
+  const handleNoteClick = (note) => {
+    setCurrentNoteId(note._id);
+    setTitle(note.title);
+    setNote(note.note);
   };
 
   return (
@@ -81,7 +149,8 @@ const Notes = ({ display }) => {
                   onClick={handleSave}
                   className="flex items-center bg-green-500 text-white p-2 rounded-full shadow hover:bg-green-600"
                 >
-                  <FaPlus className="mr-2" /> Note
+                  <FaPlus className="mr-2" /> {currentNoteId ? "Update" : "Add"}{" "}
+                  Note
                 </button>
               </div>
               <textarea
@@ -99,17 +168,23 @@ const Notes = ({ display }) => {
               {savedNotes.map((note, index) => (
                 <li
                   key={index}
-                  className="bg-white p-4 rounded mb-2 shadow-md relative"
+                  className="bg-white p-4 rounded mb-2 shadow-md relative hover:bg-gray-200 cursor-pointer"
+                  onClick={() => handleNoteClick(note)}
                 >
                   <button
-                    onClick={() => handleDeleteNote(index)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDeleteNote(note._id);
+                    }}
                     className="absolute top-2 right-2 text-red-500 focus:outline-none"
                   >
                     X
                   </button>
                   <h3 className="font-bold text-black">{note.title}</h3>
                   <p className="text-black">{note.note}</p>
-                  <span className="text-sm text-gray-500">{note.date}</span>
+                  <span className="text-sm text-gray-500">
+                    {new Date(note.time).toLocaleString()}
+                  </span>
                 </li>
               ))}
             </ul>

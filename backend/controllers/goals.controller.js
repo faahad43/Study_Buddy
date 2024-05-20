@@ -1,29 +1,21 @@
 import OpenGoal from "../models/opengoals.model.js";
 import ClosedGoal from "../models/closedgoals.model.js";
 
-// Get all open goals for a specific user and count them
-export const getOpenGoalsAndNumber = async (req, res) => {
+// Get all open goals for a specific user
+export const getOpenGoals = async (req, res) => {
   try {
     const openGoals = await OpenGoal.find({ username: req.user.username });
-    const openGoalCount = openGoals.length;
-    res.json({
-      openGoals,
-      openGoalCount,
-    });
+    res.json(openGoals);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-// Get all closed goals for a specific user and count them
-export const getClosedGoalsAndNumber = async (req, res) => {
+// Get all closed goals for a specific user
+export const getClosedGoals = async (req, res) => {
   try {
     const closedGoals = await ClosedGoal.find({ username: req.user.username });
-    const closedGoalCount = closedGoals.length;
-    res.json({
-      closedGoals,
-      closedGoalCount,
-    });
+    res.json(closedGoals);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -32,6 +24,7 @@ export const getClosedGoalsAndNumber = async (req, res) => {
 // Post a new open goal
 export const postOpenGoal = async (req, res) => {
   try {
+    console.log("Received request to add goal:", req.body);
     const { goal } = req.body;
     const newOpenGoal = new OpenGoal({
       username: req.user.username,
@@ -61,6 +54,7 @@ export const postClosedGoal = async (req, res) => {
 
 export const deleteOpenGoal = async (req, res) => {
   try {
+    console.log("onga bonga");
     const { goalId } = req.body;
     const deletedGoal = await OpenGoal.findByIdAndDelete(goalId);
     if (!deletedGoal) {
