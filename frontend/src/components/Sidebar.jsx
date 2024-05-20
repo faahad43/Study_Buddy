@@ -6,6 +6,7 @@ import { GrGroup } from "react-icons/gr";
 import { GrOptimize } from "react-icons/gr";
 import { GrTrophy } from "react-icons/gr";
 import { HiOutlineChat } from "react-icons/hi";
+import LogoutButton from './logoutButton.jsx'
 
 const sidebar = () => {
   return (
@@ -54,6 +55,11 @@ const sidebar = () => {
           <HiOutlineChat className="w-6 h-6" />
         </a>
       </div>
+
+      
+     
+      
+      <LogoutButton/>
     </div>
   );
 };

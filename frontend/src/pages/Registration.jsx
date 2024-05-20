@@ -71,7 +71,9 @@ const Registration = () => {
               <label htmlFor="female" className="text-sm text-text">Female</label>
             </div>
           </div>
-          <button className="w-full mb-4 text-[18px] mt-6 rounded-full bg-text text-emerald8 hover:bg-emerald6 hover:text-text py-2 transition-colors duration-300" type="submit">Register</button>
+          <button className="w-full mb-4 text-[18px] mt-6 rounded-full bg-text text-emerald8 hover:bg-emerald6 hover:text-text py-2 transition-colors duration-300" type="submit" disabled={loading}>
+            {loading ? <span className='loading loading-spinner'></span> : 'Register'}
+            </button>
           <div className='mt-2 items-center'>
             <div className="my-4">
               <span>Already Registered? <span className="text-blue5"> <Link to='/Login'>Login</Link></span></span>
