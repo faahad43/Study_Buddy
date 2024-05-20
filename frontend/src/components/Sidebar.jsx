@@ -4,10 +4,10 @@ import { HiMiniPencilSquare } from "react-icons/hi2";
 import { HiOutlineHome } from "react-icons/hi2";
 import { GrGroup } from "react-icons/gr";
 import { GrOptimize } from "react-icons/gr";
-import { GrTrophy } from "react-icons/gr";
+import { GrFlag } from "react-icons/gr";
 import { HiOutlineChat } from "react-icons/hi";
 import { Link } from "react-router-dom";
-import LogoutButton from './logoutButton.jsx';
+import LogoutButton from "./logoutButton.jsx";
 
 const Sidebar = () => {
   return (
@@ -33,9 +33,9 @@ const Sidebar = () => {
         </Link>
         <Link
           className="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-indigo-700"
-          to="/acheivement"
+          to="/goals"
         >
-          <GrTrophy className="w-6 h-6" />
+          <GrFlag className="w-6 h-6" />
         </Link>
         <Link
           className="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-indigo-700"
@@ -55,9 +55,11 @@ const Sidebar = () => {
         >
           <HiOutlineChat className="w-6 h-6" />
         </Link>
-        
-        <Link to='/login'> <LogoutButton /></Link>
-        
+
+        <Link to="/login">
+          {" "}
+          <LogoutButton />
+        </Link>
       </div>
     </div>
   );
