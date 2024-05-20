@@ -12,11 +12,6 @@ import { app, server } from "./socket/socket.js";
 
 const PORT = 3000;
 
-<<<<<<< HEAD
-app.get("/", (req, res) => {
-  res.send("Hello Mllo");
-});
-=======
 app.use(cors({
     origin: "http://localhost:5173", // Allow requests from this origin
     credentials: true, // Allow credentials (cookies, authorization headers, etc.)
@@ -25,7 +20,6 @@ app.use(cors({
 app.get("/",(req,res)=>{
     res.send("Hello Mllo");
 })
->>>>>>> 102ba8b295d1c3b630c2e9208e808454b292a9f5
 app.use(express.json());
 app.use(cookieParser());
 

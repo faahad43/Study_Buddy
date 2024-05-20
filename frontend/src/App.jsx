@@ -9,6 +9,7 @@ import Registration from './pages/Registration.jsx';
 import Login from './pages/Login.jsx';
 import { Toaster } from 'react-hot-toast';
 import { useAuthContext } from './context/AuthContext.jsx';
+import RoomPage from './pages/Room/index.jsx'
 
 function App() {
   const { authUser } = useAuthContext();
@@ -21,7 +22,7 @@ function App() {
             <Route path="/group" element={<StudyGroupPage />} />
             <Route path="/home" element={authUser?<Home />:<Navigate to="/login"/>} />
             <Route path="/chat" element={<Chat />} />
-            {/* <Route path="/login" element={<Login/>} /> */}
+            <Route path="/login" element={<Login/>} />
             <Route path="/registration" element={<Registration />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/room/:roomId" element={<RoomPage />} />
