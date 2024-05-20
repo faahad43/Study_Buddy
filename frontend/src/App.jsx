@@ -18,14 +18,13 @@ function App() {
       <div className="">
         <div className="w-screen">
           <Routes>
-            <Route path="/solo" element={<SoloStudyPage />} />
-            <Route path="/group" element={<StudyGroupPage />} />
+            <Route path="/solo" element={authUser ? <Dashboard/> : <Navigate to="/login"/>} />
+            <Route path="/group" element={authUser ? <StudyGroupPage /> : <Navigate to="/login"/>} />
             <Route path="/home" element={authUser?<Home />:<Navigate to="/login"/>} />
             <Route path="/chat" element={authUser?<Chat />:<Navigate to="/login"/>} />
-            <Route path="/login" element={authUser? <Navigate to="/chat"/> :<Login />} />
-            <Route path="/registration" element={authUser ? <Navigate to="/chat"/> : <Registration />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/room/:roomId" element={<RoomPage />} />
+            <Route path="/login" element={authUser? <Navigate to="/home"/> :<Login />} />
+            <Route path="/registration" element={authUser ? <Navigate to="/home"/> : <Registration />} />
+            <Route path="/room/:roomId" element={authUser ?<RoomPage /> : <Navigate to="/login"/>} />
           </Routes>
           <Toaster />
         </div>

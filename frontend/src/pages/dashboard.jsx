@@ -109,10 +109,10 @@ const Dashboard = () => {
 
   return (
     <div className='flex'>
-      <div className="w-[5%] h-screen bg-primary">
+      <div className="w-16 h-screen bg-primary">
         <Sidebar />
       </div>
-      <div className="relative h-screen w-[95%]">
+      <div className="relative h-screen flex-1">
         {bgChange()}
         <div className="relative z-10 flex flex-col h-screen w-[100%]">
           {/* Header with buttons */}

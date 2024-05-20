@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import Sidebar from "../components/Sidebar";
 
 const GroupStudy = () => {
   const [value, setValue] = useState();
@@ -9,7 +10,12 @@ const GroupStudy = () => {
   }, [navigate, value]);
 
   return (
-    <div className="bg-cover h-[100vh] flex justify-center items-center">
+    <div className="flex">
+      <div className="w-16 h-screen">
+        <Sidebar/>
+      </div>
+      
+      <div className="bg-cover h-screen flex flex-1 justify-center items-center">
       <div className="flex bg-slate8 border h-[20vh] w-[50vh] border-slate6 rounded-md p-8 shadow-lg backdrop-filter backdrop-blur-lg bg-opacity-30 relative transition-all duration-200">
         <div className="relative h-11 w-full min-w-[200px]">
           <input
@@ -33,6 +39,9 @@ const GroupStudy = () => {
         </div>
       </div>
     </div>
+      
+    </div>
+    
   );
 };
 
