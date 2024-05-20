@@ -12,6 +12,9 @@ import Chat from "./pages/chat.jsx";
 import Dashboard from "./pages/dashboard.jsx";
 import Registration from "./pages/Registration.jsx";
 import Login from "./pages/Login.jsx";
+import StatsPage from "./pages/Stats.jsx";
+import GoalsPage from "./pages/goals.jsx";
+import NotesPage from "./pages/notes.jsx";
 import { Toaster } from "react-hot-toast";
 import { useAuthContext } from "./context/AuthContext.jsx";
 import RoomPage from "./pages/Room/index.jsx";
@@ -26,6 +29,18 @@ function App() {
           <Route
             path="/solo"
             element={authUser ? <Dashboard /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/stats"
+            element={authUser ? <StatsPage /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/goals"
+            element={authUser ? <GoalsPage /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/notes"
+            element={authUser ? <NotesPage /> : <Navigate to="/login" />}
           />
           <Route
             path="/group"
