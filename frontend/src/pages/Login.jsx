@@ -1,20 +1,31 @@
-import React from "react";
+import React,{useState} from "react";
 import { Link } from "react-router-dom";
 import { BiUser } from "react-icons/bi";
 import { AiOutlineUnlock } from "react-icons/ai";
 import './loginRegistration.css'
+import useLogin from "../hooks/useLogin.js";
 
 const Login = () => {
+  const[username,setUsername]=useState('');
+  const[password,setPassword]=useState('');
+
+  const {loading,login} = useLogin();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await login(username,password)
+  }
+
   return (
     <div className='text-text h-[100vh] flex justify-center items-center bg-cover'>
       <div className="bg-slate8 border border-slate6 rounded-md p-8 shadow-lg backdrop-filter backdrop-blur-lg bg-opacity-30 relative transition-all duration-200">
         <h1 className="text-4xl text-text font-bold text-center mb-6">Login</h1>
-        <form action="">
+        <form onSubmit={handleSubmit}>
           <div className="relative my-4">
             <input
               type="text"
               className="block w-72 py-2.5 px-0 text-sm text-text bg-transparent border-0 border-b-2 border-gray3 appearance-none dark:text-text dark:border-gray6 dark:focus:border-blue5 focus:outline-none focus:ring-0 focus:text-text focus:border-blue6 peer"
-              placeholder=""
+              placeholder="" value={username} onChange={(e)=>setUsername(e.target.value)} 
             />
             <label
               htmlFor=""
@@ -28,7 +39,7 @@ const Login = () => {
             <input
               type="password"
               className="block w-72 py-2.5 px-0 text-sm text-text bg-transparent border-0 border-b-2 border-gray3 appearance-none dark:text-text dark:border-gray6 dark:focus:border-blue5 focus:outline-none focus:ring-0 focus:text-text focus:border-blue6 peer"
-              placeholder=""
+              placeholder="" value={password} onChange={(e)=>setPassword(e.target.value)}
             />
             <label
               htmlFor=""
@@ -51,7 +62,7 @@ const Login = () => {
             className="w-full mb-4 text-[18px] mt-6 rounded-full bg-text text-emerald8 hover:bg-emerald6 hover:text-text py-2 transition-colors duration-300"
             type="submit"
           >
-            Login
+            {loading? <span className="loading loading-spinner"></span>: 'Login'}
           </button>
           <div>
             <span className="m-4">

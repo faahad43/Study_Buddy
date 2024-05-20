@@ -14,6 +14,7 @@ import Registration from "./pages/Registration.jsx";
 import Login from "./pages/Login.jsx";
 import { Toaster } from "react-hot-toast";
 import { useAuthContext } from "./context/AuthContext.jsx";
+import RoomPage from "./pages/Room/index.jsx";
 
 function App() {
   const { authUser } = useAuthContext();
@@ -22,22 +23,34 @@ function App() {
     <div className="">
       <div className="w-screen">
         <Routes>
-          <Route path="/solo" element={<SoloStudyPage />} />
-          <Route path="/group" element={<StudyGroupPage />} />
+          <Route
+            path="/solo"
+            element={authUser ? <Dashboard /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/group"
+            element={authUser ? <StudyGroupPage /> : <Navigate to="/login" />}
+          />
           <Route
             path="/home"
             element={authUser ? <Home /> : <Navigate to="/login" />}
           />
-          <Route path="/chat" element={<Chat />} />
+          <Route
+            path="/chat"
+            element={authUser ? <Chat /> : <Navigate to="/login" />}
+          />
           <Route
             path="/login"
-            element={authUser ? <Navigate to="/chat" /> : <Login />}
+            element={authUser ? <Navigate to="/home" /> : <Login />}
           />
           <Route
             path="/registration"
-            element={authUser ? <Navigate to="/chat" /> : <Registration />}
+            element={authUser ? <Navigate to="/home" /> : <Registration />}
           />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="/room/:roomId"
+            element={authUser ? <RoomPage /> : <Navigate to="/login" />}
+          />
         </Routes>
         <Toaster />
       </div>

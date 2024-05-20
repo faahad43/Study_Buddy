@@ -52,8 +52,8 @@ const timer = ({display}) => {
   }, [timerRunning, workTime, breakTime, isWorkTime]);
 
   return (
-    <div className={`flex flex-col items-center w-[300px] p-4 text-light bg-lightdark rounded-lg opacity-90 ${display}`}>
-      <div className="text-3xl font-bold my-4">
+    <div className={`flex flex-col items-center w-[300px] 2xl:h-[320px] h-[270px] p-4 text-light bg-lightdark rounded-lg opacity-90 ${display}`}>
+      <div className="text-3xl font-bold my-0 2xl:my-4">
         {isWorkTime ? 'Work Time' : 'Break Time'}
       </div>
       <div className="text-3xl font-bold my-2">{formatTime(timeLeft)}</div>
