@@ -25,7 +25,7 @@ const GoalsWidget = ({ display }) => {
   };
 
   return (
-    <div className={`flex flex-col items-center w-[300px] p-4 text-light bg-lightdark rounded-lg opacity-90 ${display}`}>
+    <div className={`flex flex-col items-center w-[300px] h-[350px] p-4 text-light bg-lightdark rounded-lg opacity-90 ${display}`}>
       <div className="text-3xl font-bold my-4">Goals</div>
       <div className="flex justify-center items-center space-x-4">
         <input

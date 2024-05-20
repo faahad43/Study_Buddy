@@ -33,7 +33,7 @@ const NotesWidget = ({ display }) => {
   };
 
   return (
-    <div className={`flex flex-col items-center w-[300px] p-4 text-light bg-lightdark rounded-lg opacity-90 ${display}`}>
+    <div className={`flex flex-col items-center w-[300px] 2xl:h-[350px] h-[320px] p-4 text-light bg-lightdark rounded-lg opacity-90 ${display}`}>
       <div className="text-3xl font-bold my-4  text-center w-full">
         Notes
       </div>

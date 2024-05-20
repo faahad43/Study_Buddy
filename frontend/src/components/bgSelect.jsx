@@ -50,8 +50,8 @@ const GridWidget = ({ display,clickButton }) => {
 
   return (
         
-    <div className={`flex flex-wrap justify-center items-center w-[300px] p-4 text-light bg-lightdark rounded-lg opacity-90 ${display}`}>
-      <h2 className="text-xl font-semibold mb-2">Set Background</h2>
+    <div className={`flex flex-wrap justify-center items-center w-[300px] 2xl:h-[400px]  h-[300px] p-4 text-light bg-lightdark rounded-lg opacity-90 ${display}`}>
+      <h2 className="text-2xl font-semibold mb-2">Set Background</h2>
       <div className='flex flex-wrap justify-center items-center'>
       {renderButtons()}
       </div>

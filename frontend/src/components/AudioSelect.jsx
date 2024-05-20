@@ -18,7 +18,7 @@ const audioTracks = [
   { id: 6, name: 'Forest sounds', src: forest },
 ];
 
-const AudioWidget = () => {
+const AudioWidget = ({display}) => {
   const [selectedTrack, setSelectedTrack] = useState(null);
   const audioRefs = useRef(audioTracks.map(() => React.createRef()));
 
@@ -42,11 +42,11 @@ const AudioWidget = () => {
   };
 
   return (
-    <div className="p-4 bg-lightdark rounded-lg opacity-90 w-[250px]">
+    <div className={`p-4 bg-lightdark rounded-lg opacity-90 w-[300px] 2xl:h-[400px]  h-[300px] ${display}`}>
       <h2 className="text-xl font-semibold mb-2 text-text text-center">Select Music</h2>
-      <div className="flex flex-col space-y-2">
+      <div className="flex flex-col space-y-1 2xl:space-y-2">
         {audioTracks.map((track, index) => (
-          <div key={track.id} className="flex items-center gap-2 p-2 bg-dark rounded-full">
+          <div key={track.id} className="flex items-center gap-2 p-1 2xl:p-2 bg-dark rounded-full">
             <button
               onClick={() => handleButtonClick(track.id)}
               className="ml-2 pt-1 focus:outline-none"
