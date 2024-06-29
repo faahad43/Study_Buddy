@@ -152,13 +152,13 @@ function Stats() {
   const { authUser } = useAuthContext();
   return (
     <div className=" flex">
-      <div className="w-[5%] h-screen bg-primary">
+      <div className="w-16 h-screen bg-primary">
         <Sidebar />
       </div>
       {/* full container */}
-      <div className="text-text flex relative h-screen w-[95%] gap-10 bg-cover">
+      <div className="text-text flex relative h-screen flex-1 gap-10 bg-cover">
         {/* left div */}
-        <div className="flex flex-wrap gap-10 w-[75%]">
+        <div className="flex flex-wrap gap-8 w-[75%]">
           <div className="bg-slate8 flex-wrap flex justify-center items-center border mt-8 ml-10 w-[25%] h-[40%] border-slate6 rounded-md p-8 shadow-lg backdrop-filter backdrop-blur-lg bg-opacity-30 relative transition-all duration-200">
             <div className=" w-[50%] rounded-[50%] h-[40%] ">
               <IoPersonCircleOutline
@@ -258,10 +258,10 @@ function Stats() {
 
         <div className="flex w-[25%] justify-center">
           <div className="bg-slate8 border mr-5 mt-8 mb-20 w-[100%] border-slate6 rounded-md p-8 shadow-lg backdrop-filter backdrop-blur-lg bg-opacity-30 relative transition-all duration-200">
-            <h1 className="text-4xl text-text font-bold text-center mb-6">
+            <h1 className="text-4xl text-text font-bold text-center mb-6 ">
               FRIENDS
             </h1>
-            <div>
+            <div className="overflow-y-scroll h-[90%]">
               <Conversations />
             </div>
           </div>

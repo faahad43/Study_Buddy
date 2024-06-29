@@ -2,3 +2,6 @@
     background: rgb(54,0,51);
     background: linear-gradient(90deg, rgba(54,0,51,1) 0%, rgba(11,135,147,1) 100%);
 }
+.bg-reverse{
+    background: linear-gradient(90deg,rgba(11,135,147,1) 0%, rgba(54,0,51,1) 40%);
+}

@@ -56,8 +56,9 @@ const Sidebar = () => {
           <HiOutlineChat className="w-6 h-6" />
         </Link>
 
-        <Link to="/login">
-          {" "}
+        <Link to="/login"
+          className="flex items-center justify-center w-12 h-12 mt-2 rounded hover:bg-indigo-700"
+          >
           <LogoutButton />
         </Link>
       </div>
