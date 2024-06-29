@@ -79,7 +79,7 @@ Contributions are welcome! Please follow these steps:
 ## Contributors
 
 - Syed Fahad Shah
-- Muhammad Wahaj Khan
+- Muhammad Wahaj Khan 
 - Ali Abdullah
 
 ## License
